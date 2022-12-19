@@ -24,7 +24,7 @@ $mysqli = new mysqli($servername, $user, $password, $database);
  
 // Checking for connections
 if ($mysqli->connect_error) {
-    die('Connect Error (' .$mysqli->connect_errno . ') '.
+    die('Connect Error (' . $mysqli->connect_errno . ') '.
     $mysqli->connect_error);
 }
         $sql = " SELECT * FROM attended ";
@@ -91,10 +91,10 @@ if ($mysqli->connect_error) {
                         <!-- FETCHING DATA FROM EACH
                     ROW OF EVERY COLUMN -->
                         <td>
-                            <?php echo $rows['Event_name'];?>
+                            <?php echo $rows['Event_id'];?>
                     </td>
                     <td>
-                        <?php echo $rows['name'];?>
+                        <?php echo $rows['id'];?>
                     </td>
                     </tr>
 

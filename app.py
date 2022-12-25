@@ -46,11 +46,15 @@ def Attendance():
   if request.method == "POST":
     conn = mariadb.connect(user='admin', password='password',
                            db='Attended', host='localhost')
-    c = conn.cursor()
-    c.execute("SELECT * FROM attended ")
-    output = c.fetchone()
-    c.close
-    return render_template("Attendance.html", data=output)
+    c = conn.cursor(buffered=True)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM attended")
+
+  # Fetch the results of the query
+    users = cur.fetchall()
+
+  # Render the results in a template
+    return render_template("Attendance.html", users=users)
   else:
     return render_template("Attendance.html")
 
@@ -91,13 +95,18 @@ def Users():
   if request.method == "POST":
     conn = mariadb.connect(user='admin', password='password',
                            db='Attended', host='localhost')
-    c = conn.cursor()
-    c.execute("SELECT * FROM users ")
-    output = c.fetchone()
-    c.close
-    return render_template("Users.html", data=output)
+    c = conn.cursor(buffered=True)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users")
+
+  # Fetch the results of the query
+    users = cur.fetchall()
+
+  # Render the results in a template
+    return render_template("Users.html", users=users)
   else:
     return render_template("Users.html")
+
 
 
 @app.route('/Events', methods=['GET', 'POST'])
@@ -105,11 +114,15 @@ def Events():
   if request.method == "POST":
     conn = mariadb.connect(user='admin', password='password',
                            db='Attended', host='localhost')
-    c = conn.cursor()
-    c.execute("SELECT * FROM Event ")
-    output = c.fetchone()
-    c.close
-    return render_template("Events.html", data=output)
+    c = conn.cursor(buffered=True)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Event")
+
+  # Fetch the results of the query
+    users = cur.fetchall()
+
+  # Render the results in a template
+    return render_template("Events.html", users=users)
   else:
     return render_template("Events.html")
 

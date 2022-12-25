@@ -11,7 +11,6 @@ app =Flask(__name__)
 
 
 def Attend():
-  while True:
     conn = mariadb.connect(user='admin', password='password',
                            db='Attended', host='localhost')
     c = conn.cursor()
@@ -46,11 +45,11 @@ def Attend():
 @app.route('/')
 @app.route('/Attendance', methods=['GET', 'POST'])
 def Attendance():
-  rfid, text = reader.read()
-  while rfid < 0:
+  while True:
     rfid, text = reader.read()
+    while rfid < 0:
+      rfid, text = reader.read()
     Attend()
-
   return render_template('Attendance.html')
 
 

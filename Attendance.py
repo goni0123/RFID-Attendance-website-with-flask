@@ -16,7 +16,7 @@ while True:
         rfid, text = reader.read()
         c.execute("INSERT INTO attended(A_name,rfid_uid)SELECT name,rfid_uid FROM users WHERE rfid_uid = {}".format(rfid))
         conn.commit()
-        c.close()
+        
         c.execute("SELECT A_in FROM attended where rfid_uid = '{}'".format(rfid))
         conn.commit()
         io = c.fetchall()

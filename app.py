@@ -11,46 +11,48 @@ app =Flask(__name__)
 
 
 def Attend():
+  rfid, text = reader.read()
+  while rfid < 0:
+    rfid, text = reader.read()
+  conn = mariadb.connect(user='admin', password='password',db='Attended', host='localhost')
+  c = conn.cursor(buffered=True)
+  query = ("SELECT * FROM attended where rfid_uid = '{}'".format(rfid))
+  c.execute(query)
+  print(c.rowcount)
+  if c.rowcount == 0:
+    d1 = datetime.datetime.today().strftime('%Y%m%d')
+    t1 = datetime.datetime.today().strftime('%H:%M')
+    c = conn.cursor()
+    c.execute("INSERT INTO attended(E_name,E_date,A_name,rfid_uid) SELECT Event.Event_name, Event.Event_date, users.name,users.rfid_uid FROM Event INNER JOIN users WHERE users.rfid_uid = {} AND Event.Event_date= {}".format(rfid, d1))
+    c.execute("update attended set A_in =('{}') where rfid_uid = ('{}')".format(t1, rfid))
+    conn.commit()
+    conn.close()
+    c.close()
+  else:
+    t1 = datetime.datetime.today().strftime('%H:%M')
+    c = conn.cursor()
+    c.execute("update attended set A_out =('{}') where rfid_uid = ('{}')".format(t1, rfid))
+    conn.commit()
+    conn.close()
+    c.close()
+
+@app.route('/')
+def attended():
+  while True:
+      Attend()
+  
+@app.route('/Attendance', methods=['GET', 'POST'])
+def Attendance():
+  if request.method == "POST":
     conn = mariadb.connect(user='admin', password='password',
                            db='Attended', host='localhost')
     c = conn.cursor()
-    d1 = datetime.datetime.today().strftime('%Y%m%d')
-    c.execute("INSERT INTO attended(E_name,E_date)SELECT Event_name, Event_date FROM Event WHERE Event_date = {}".format(f'{d1}'))
-    conn.commit()
-    c.close()
-    rfid, text = reader.read()
-    while rfid < 0:
-        rfid, text = reader.read()
-        c.execute(
-            "INSERT INTO attended(A_name,rfid_uid)SELECT name,rfid_uid FROM users WHERE rfid_uid = {}".format(rfid))
-        conn.commit()
-        c.close()
-        c.execute("SELECT A_in FROM attended where rfid_uid = '{}'".format(rfid))
-        conn.commit()
-        io = c.fetchall()
-        c.close()
-        if io == 0:
-            t1 = datetime.datetime.today().strftime('%H:%M')
-            c.execute("INSERT INTO attended(A_in) value ({})".format(t1))
-            conn.commit()
-            conn.close()
-            c.close()
-        else:
-            t1 = datetime.datetime.today().strftime('%H:%M')
-            c.execute("INSERT INTO attended(A_out) value ({})".format(t1))
-            conn.commit()
-            conn.close()
-            c.close()
-
-@app.route('/')
-@app.route('/Attendance', methods=['GET', 'POST'])
-def Attendance():
-  while True:
-    rfid, text = reader.read()
-    while rfid < 0:
-      rfid, text = reader.read()
-    Attend()
-  return render_template('Attendance.html')
+    c.execute("SELECT * FROM attended ")
+    output = c.fetchone()
+    c.close
+    return render_template("Attendance.html", data=output)
+  else:
+    return render_template("Attendance.html")
 
 
 @app.route('/Adduser', methods=['GET','POST'] )

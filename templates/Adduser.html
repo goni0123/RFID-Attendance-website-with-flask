@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="static/cs.css" />
 </head>
 
 <body>
-    <form method="post">
-        <label>ID:</label>
-        <input type="text" name="id" id="id" /><br>
-        <label>Name:</label>
-        <input type="text" name="name" id="name" /><br>
-        <label>The RFID code is {{rfid}}</label>
-        <input type="text" name="rfid_uid" id="rfid_uid" /><br>
-        <input type="submit" name=submit value="Submit" />
-    </form>
+    <input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
+    <div class="wrapper">
+        <ul>
+            <li><a href="/Attendance">Attendance</a></li>
+            <li><a href="/Adduser">Register User</a></li>
+            <li><a href="/Addevent">Register Event</a></li>
+            <li><a href="/Users">Display Users</a></li>
+            <li><a href="/Events">Display events</a></li>
+        </ul>
+    </div>
+    <div class="register">
+        <form method="post">
+            <label>ID:</label>
+            <input type="text" name="id" id="id" /><br>
+            <label>Name:</label>
+            <input type="text" name="name" id="name" /><br>
+            <input type="submit" name=submit value="Submit" />
+        </form>
+        <div>
 
 </body>
 

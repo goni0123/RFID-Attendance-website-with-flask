@@ -5,47 +5,44 @@
     <link rel="stylesheet" href="/static/cs.css" />
 </head>
 
-<tr>
-    <input type="checkbox" id="active">
-    <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
-    <div class="wrapper">
-        <ul>
-            <li><a href="/Attendance">Attendance</a></li>
-            <li><a href="/Adduser">Register User</a></li>
-            <li><a href="/Addevent">Register Event</a></li>
-            <li><a href="/Users">Display Users</a></li>
-            <li><a href="/Events">Display events</a></li>
-        </ul>
-    </div>
+<body>
+    <tr>
+        <input type="checkbox" id="active">
+        <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
+        <div class="wrapper">
+            <ul>
+                <li><a href="{{ url_for('TakeAttendance') }}">Run Script</a></li>
+                <li><a href="/Attendance">Attendance</a></li>
+                <li><a href="/Adduser">Register User</a></li>
+                <li><a href="/Addevent">Register Event</a></li>
+                <li><a href="/Users">Display Users</a></li>
+                <li><a href="/Events">Display events</a></li>
+            </ul>
+        </div>
+        <div style="margin-left: 450px;margin-top: 150px">
+            <form method="POST">
+                <input type="submit" value="show data">
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>RFID</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[2] }}</td>
+                        <td>{{ user[3] }}</td>
 
-    <form method="POST">
-        <input type="submit" value="show data">
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>RFID</th>
-                <th>Created</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user[0] }}</td>
-                <td>{{ user[1] }}</td>
-                <td>{{ user[2] }}</td>
-                <td>{{ user[3] }}</td>
-                <td>{{ user[4] }}</td>
-                <td>{{ user[5] }}</td>
-                <td>{{ user[6] }}</td>
-                <td>{{ user[7] }}</td>
-                <td>{{ user[8] }}</td>
-                <td>{{ user[9] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    </body>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</body>

@@ -6,6 +6,12 @@
     font-family: 'Oswald', sans-serif;
 }
 
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
 .wrapper {
     position: fixed;
     top: 0;

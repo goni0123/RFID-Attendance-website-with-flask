@@ -14,7 +14,8 @@ def Attend():
   rfid, text = reader.read()
   while rfid < 0:
     rfid, text = reader.read()
-  conn = mariadb.connect(user='admin', password='password',db='Attended', host='localhost')
+  conn = mariadb.connect(user='admin', password='password',
+                         db='Attended', host='localhost')
   c = conn.cursor(buffered=True)
   query = ("SELECT * FROM attended where rfid_uid = '{}'".format(rfid))
   c.execute(query)
@@ -36,11 +37,15 @@ def Attend():
     conn.close()
     c.close()
 
-@app.route('/')
-def attended():
-  while True:
-      Attend()
+
+@app.route('/TakeAttendance')
+def run_script():
+    # Run the script here
+    subprocess.call(["python", "Attendance.py"])
+    return 'Taking Attendance'
   
+    
+@app.route('/')
 @app.route('/Attendance', methods=['GET', 'POST'])
 def Attendance():
   if request.method == "POST":

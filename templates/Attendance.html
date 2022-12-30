@@ -10,6 +10,7 @@
     <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
     <div class="wrapper">
         <ul>
+            <li><a href="{{ url_for('TakeAttendance') }}">Run Script</a></li>
             <li><a href="/Attendance">Attendance</a></li>
             <li><a href="/Adduser">Register User</a></li>
             <li><a href="/Addevent">Register Event</a></li>
@@ -28,7 +29,7 @@
                 <th>Name</th>
                 <th>Check in</th>
                 <th>Check out</th>
-                <th>RFID</th>
+                <th>RFID </th>
             </tr>
         </thead>
         <tbody>
@@ -40,10 +41,7 @@
                 <td>{{ user[3] }}</td>
                 <td>{{ user[4] }}</td>
                 <td>{{ user[5] }}</td>
-                <td>{{ user[6] }}</td>
-                <td>{{ user[7] }}</td>
-                <td>{{ user[8] }}</td>
-                <td>{{ user[9] }}</td>
+
             </tr>
             {% endfor %}
         </tbody>

@@ -10,7 +10,7 @@
     <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
     <div class="wrapper">
         <ul>
-            <li><a href="{{ url_for('TakeAttendance') }}">Run Script</a></li>
+            <li><a href="/TakeAttendance">Start Attend</a></li>
             <li><a href="/Attendance">Attendance</a></li>
             <li><a href="/Adduser">Register User</a></li>
             <li><a href="/Addevent">Register Event</a></li>
@@ -18,32 +18,41 @@
             <li><a href="/Events">Display events</a></li>
         </ul>
     </div>
+    <div style="margin-top: 10%">
 
-    <form method="POST">
-        <input type="submit" value="show data">
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Event Name</th>
-                <th>Event Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user[0] }}</td>
-                <td>{{ user[1] }}</td>
-                <td>{{ user[2] }}</td>
-                <td>{{ user[3] }}</td>
-                <td>{{ user[4] }}</td>
-                <td>{{ user[5] }}</td>
-                <td>{{ user[6] }}</td>
-                <td>{{ user[7] }}</td>
-                <td>{{ user[8] }}</td>
-                <td>{{ user[9] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <form method="POST">
+            <button class="buttoni1" type="submit" style=" width: 130px;
+             height: 30px;
+             background: rgb(7, 7, 153);
+             border-radius: 5px;
+             margin-left: 42.5%;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            text-align: center;
+            color: #ffffff;
+            border: none;
+            text-transform: uppercase;">Show Data</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event ID</th>
+                    <th>Event Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>

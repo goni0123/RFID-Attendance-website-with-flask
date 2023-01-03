@@ -36,13 +36,33 @@ def Attend():
     conn.commit()
     conn.close()
     c.close()
+def Attend1():
+  reader = SimpleMFRC522()
+  while True:
+    reader = SimpleMFRC522()
+    rfid, text = reader.read()
+    conn = mariadb.connect(user='admin', password='password',
+                           db='Attended', host='localhost')
+    c = conn.cursor(buffered=True)
+    d1 = datetime.datetime.today().strftime('%Y%m%d')
+    t1 = datetime.datetime.today().strftime('%H:%M:%S')
+    c = conn.cursor()
+    c.execute("INSERT INTO attended(E_name,E_date,A_name,rfid_uid,A_in) SELECT Event.Event_name, Event.Event_date, users.name,users.rfid_uid,'{}' FROM Event INNER JOIN users WHERE users.rfid_uid = {} AND Event.Event_date= {}".format(t1, rfid, d1))
+    check ="Your are attended"
+    conn.commit()
+    conn.close()
+    c.close()
 
 
-@app.route('/TakeAttendance')
-def run_script():
-    # Run the script here
-    subprocess.call(["python", "Attendance.py"])
-    return 'Taking Attendance'
+
+@app.route('/TakeAttendance', methods=['GET', 'POST'])
+def TakeAttendance():
+  if request.method =="POST":
+    Attend1()
+    return render_template("TakeAttendance.html")
+  else :
+    return render_template("TakeAttendance.html")
+    
   
     
 @app.route('/')

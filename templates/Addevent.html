@@ -5,9 +5,10 @@
     <link rel="stylesheet" href="/static/cs.css" />
 </head>
 
-<body>
+<div>
     <input type="checkbox" id="active">
     <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
+
     <div class="wrapper">
         <ul>
             <li><a href="/TakeAttendance">Start Attend</a></li>
@@ -18,16 +19,28 @@
             <li><a href="/Events">Display events</a></li>
         </ul>
     </div>
-
-
-    <form method="post">
+</div>
+<div>
+    <form method="post" style="margin-top: 15%; margin-left: 45%; ">
 
         <label>Name of event:</label>
         <input type="text" name="Event_name" id="Event_name" /><br>
         <label>Event Date:</label>
         <input type="date" name="Data_start" id="Data_start" /><br>
 
-        <input type="submit" name=submit value="Submit" />
+        <button class="buttoni1" type="submit" style=" width: 130px;
+             height: 30px;
+             background: rgb(7, 7, 153);
+             border-radius: 5px;
+             margin-top: 5px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            text-align: center;
+            color: #ffffff;
+            border: none;
+            text-transform: uppercase;">Save Event</button>
     </form>
-
+</div>
 </body>

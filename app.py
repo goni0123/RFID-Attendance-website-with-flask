@@ -4,6 +4,7 @@ from mfrc522 import SimpleMFRC522
 import mariadb
 from flask_table import Table, Col
 import datetime
+import time
 
 reader = SimpleMFRC522()
 
@@ -53,6 +54,25 @@ def Attend1():
     conn.close()
     c.close()
 
+
+def Attend2():
+  reader = SimpleMFRC522()
+  while True:
+    reader = SimpleMFRC522()
+    rfid, text = reader.read()
+    conn = mariadb.connect(user='admin', password='password',
+                           db='Attended', host='localhost')
+    c = conn.cursor(buffered=True)
+    d1 = datetime.datetime.today().strftime('%Y%m%d')
+    t1 = datetime.datetime.today().strftime('%H:%M:%S')
+    c = conn.cursor()
+    c.execute("INSERT INTO attended(E_name,E_date,A_name,rfid_uid,A_in) SELECT Event.Event_name, Event.Event_date, users.name,users.rfid_uid,'{}' FROM Event INNER JOIN users WHERE users.rfid_uid = {} AND Event.Event_date= {}".format(t1, rfid, d1))
+    if c.rowcount == 1: 
+      time.sleep(3) 
+    check = "Your are attended"
+    conn.commit()
+    conn.close()
+    c.close()
 
 
 @app.route('/TakeAttendance', methods=['GET', 'POST'])

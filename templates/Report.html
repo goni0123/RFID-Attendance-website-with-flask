@@ -2,30 +2,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="/static/cs.css" />
+    <link rel="stylesheet" href="static/cs.css" />
 </head>
 
-<div>
+<body>
     <input type="checkbox" id="active">
     <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
     <div class="wrapper">
         <ul>
             <li><a href="/TakeAttendance">Start Attend</a></li>
-            <li><a href="/Attendance">Attendance</a></li>
             <li><a href="/Adduser">Register User</a></li>
             <li><a href="/Addevent">Register Event</a></li>
             <li><a href="/Users">Display Users</a></li>
             <li><a href="/Events">Display events</a></li>
+            <li><a href="/Report">Report</a></li>
         </ul>
     </div>
-
-    <div style="margin-left: 0%;margin-top: 10%">
-        <form method="POST">
+    <div class="register" style="margin-top: 15%; margin-left: 45%; ">
+        <form method="post">
+            <label>From Date:</label>
+            <input type="date" name="Data_start" id="Data_start" /><br>
+            <label>To Date:</label>
+            <input type="date" name="name" id=" name" /><br>
             <button class="buttoni1" type="submit" style=" width: 130px;
              height: 30px;
              background: rgb(7, 7, 153);
              border-radius: 5px;
-             margin-left: 47.5%;
+             margin-top: 5px;
             font-style: normal;
             font-weight: 700;
             font-size: 16px;
@@ -33,15 +36,18 @@
             text-align: center;
             color: #ffffff;
             border: none;
-            text-transform: uppercase;">Show Data</button>
+            text-transform: uppercase;">Search</button>
         </form>
+    </div>
+    <div>
         <table>
             <thead>
                 <tr>
                     <th>Event</th>
                     <th>Date</th>
                     <th>Name</th>
-                    <th>Check in/out</th>
+                    <th>Check in</th>
+                    <th>Check out</th>
                     <th>RFID </th>
                 </tr>
             </thead>
@@ -53,11 +59,11 @@
                     <td>{{ user[2] }}</td>
                     <td>{{ user[3] }}</td>
                     <td>{{ user[4] }}</td>
-
+                    <td>{{ user[5] }}</td>
 
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    </body>
+</body>
